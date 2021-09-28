@@ -22,7 +22,7 @@ class CreateCommentsTable extends Migration
             $table->foreignId('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreignId('parent_id')->nullable();
-            $table->foreign('comment_id')->references('id')->on('comments');
+            $table->foreign('parent_id')->references('id')->on('comments');
             $table->text('text');
             $table->enum('status', Comment::ALL_STATUSES)->default(Comment::STATUS_PENDING);
 
