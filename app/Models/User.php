@@ -12,8 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const STATUS_OK = 1;
-    const STATUS_BANNED = 2;
+    const STATUS_OK = 'OK';
+    const STATUS_BANNED = 'BANNED';
     const ALL_STATUSES = [
         self::STATUS_OK,
         self::STATUS_BANNED,
