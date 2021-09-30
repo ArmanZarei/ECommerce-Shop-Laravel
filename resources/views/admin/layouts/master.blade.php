@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
 </head>
 <body>
+
 <div class="d-flex">
     @include('admin.partials.sidebar')
     <div class="flex-grow-1" style="background: #EEF0F8;">
@@ -19,7 +20,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="{{ asset('js/common/bootstrap.bundle.min.js') }}"></script>
 </body>
