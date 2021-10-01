@@ -20,6 +20,30 @@
                     </a>
                 </li>
                 <li class="menu-section">
+                    <h5>Shop</h5>
+                </li>
+                <li>
+                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#orders-collapse">
+                        <i class="fad fa-trademark me-3 nav-item-icon"></i>
+                        <span>Brands</span>
+                        <i class="fas fa-xs fa-chevron-right ms-auto"></i>
+                    </a>
+                    <ul class="sidebar-sub-nav collapse" id="orders-collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('admin.brands.index') }}" class="nav-link d-flex align-items-center">
+                                <i class="fad fa-list me-2 nav-item-icon"></i>
+                                <span>List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.brands.create') }}" class="nav-link d-flex align-items-center">
+                                <i class="fa fa-plus me-2 nav-item-icon"></i>
+                                <span>Create</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-section mt-5">
                     <h5>Blog</h5>
                 </li>
                 <li>

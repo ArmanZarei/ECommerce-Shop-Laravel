@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.layouts.master');
+});
+
+Route::prefix('/admin')->name('admin.')->group(function () {
+    Route::resource('brands', BrandController::class)->except(['destroy', 'show']);
 });

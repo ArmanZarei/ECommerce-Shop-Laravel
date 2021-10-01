@@ -2,6 +2,9 @@ body {
     min-height: 100vh;
     font-family: "Poppins", var(--bs-font-sans-serif);
 }
+.custom-text-bold {
+    font-weight: 500;
+}
 main#main-page {
     display: flex;
     flex-wrap: nowrap;
@@ -198,10 +201,14 @@ main#main-page {
 }
 
 .card-header {
-    font-size: 18px;
     border-bottom: 1.5px solid;
     border-bottom-color: #EEF0F8;
     padding: 15px 20px;
+}
+.card-header h5 {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
     color: #181C32;
 }
 
@@ -321,6 +328,26 @@ main#main-page {
     background-color: #181C32;
 }
 
+/************** Test Styles ***************/
+.custom-text-danger {
+    color: #F64E60;
+}
+.custom-text-primary {
+    color: #3699FF;
+}
+.custom-text-info {
+    color: #8950FC;
+}
+.custom-text-dark {
+    color: #3F4254;
+}
+.custom-text-success {
+    color: #1BC5BD;
+}
+.custom-text-warning {
+    color: #FFA800;
+}
+
 /************** Label Styles ***************/
 .label-style-1 {
     font-size: 12px;
@@ -358,9 +385,18 @@ main#main-page {
 }
 
 /************** Form ***************/
-.custom-form input {
+.custom-form {
+    color: #3F4254;
+}
+.custom-form input[type='text'], input[type='email'], input[type='password'] {
     border: 2px solid #cfcfd9;
     outline: none;
+}
+.input-error {
+    color: #F64E60;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 2px;
 }
 
 /************** Floating Label ***************/
@@ -403,3 +439,80 @@ main#main-page {
 .floating-label-container input:focus + label {
     color: #3699FF;
 }
+.floating-label-container input.has-error {
+    border-color: #F64E60;
+}
+.floating-label-container input.has-error + label{
+    color: #F64E60;
+}
+
+
+/************** IOS Button ***************/
+.ios-button {
+    appearance: none;
+    border: none;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background: #e7e7e7;
+    border-radius: 30px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    user-select: none;
+    /* box-shadow: 0px 0px 5px #9E9E9E; */
+}
+.ios-button::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    left: 3px;
+    transition-duration: 0.2s;
+    box-shadow: 0px 0px 5px #9E9E9E;
+}
+.ios-button:checked::after {
+    left: calc(100% - 24px - 3px);
+    box-shadow: 0px 0px 5px #12467c;
+}
+.ios-button:checked {
+    background: #3699FF;
+}
+
+/************** Table ***************/
+.custom-table thead th {
+    color: #B5B5C3;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    border: none;
+}
+.custom-table thead {
+    border: none;
+}
+.custom-table tr {
+    border-bottom: 1px solid #EBEDF3;
+}
+.custom-table tbody td {
+    font-size: 13px;
+    padding: 16px 8px;
+    color: #3F4254;
+    vertical-align: middle;
+}
+.custom-table .cell-actions i {
+    font-size: 16px;
+    color: #8c8c94;
+    margin-right: 5px;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.custom-table .cell-actions i:hover {
+    color: #3699FF;
+    background: #F3F6F9;
+}
+
+
