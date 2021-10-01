@@ -23,12 +23,12 @@
                     <h5>Shop</h5>
                 </li>
                 <li>
-                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#orders-collapse">
+                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#brands-collapse">
                         <i class="fad fa-trademark me-3 nav-item-icon"></i>
                         <span>Brands</span>
                         <i class="fas fa-xs fa-chevron-right ms-auto"></i>
                     </a>
-                    <ul class="sidebar-sub-nav collapse" id="orders-collapse" data-bs-parent="#sidebar-nav">
+                    <ul class="sidebar-sub-nav collapse" id="brands-collapse" data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('admin.brands.index') }}" class="nav-link d-flex align-items-center">
                                 <i class="fad fa-list me-2 nav-item-icon"></i>
