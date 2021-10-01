@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/common/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
+    @notifyCss
 </head>
 <body>
 
@@ -21,6 +22,9 @@
     </div>
 </div>
 
+<x:notify-messages />
+
 <script src="{{ asset('js/common/bootstrap.bundle.min.js') }}"></script>
+@notifyJs
 </body>
 </html>

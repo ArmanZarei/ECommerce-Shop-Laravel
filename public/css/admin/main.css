@@ -515,4 +515,8 @@ main#main-page {
     background: #F3F6F9;
 }
 
+/************** Notify ***************/
+div.notify {
+    top: auto;
+}
 
