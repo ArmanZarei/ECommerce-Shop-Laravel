@@ -30,7 +30,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if($attributes->isEmpty())
+                            @if($brands->isEmpty())
                                 <tr>
                                     <td colspan="5" class="text-center pt-4 pb-4">No records found</td>
                                 </tr>
