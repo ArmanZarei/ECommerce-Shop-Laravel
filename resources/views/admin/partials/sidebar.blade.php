@@ -43,6 +43,27 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#attributes-collapse">
+                        <i class="fad fa-list-alt me-3 nav-item-icon"></i>
+                        <span>Attributes</span>
+                        <i class="fas fa-xs fa-chevron-right ms-auto"></i>
+                    </a>
+                    <ul class="sidebar-sub-nav collapse" id="attributes-collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('admin.attributes.index') }}" class="nav-link d-flex align-items-center">
+                                <i class="fad fa-list me-2 nav-item-icon"></i>
+                                <span>List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.attributes.create') }}" class="nav-link d-flex align-items-center">
+                                <i class="fa fa-plus me-2 nav-item-icon"></i>
+                                <span>Create</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu-section mt-5">
                     <h5>Blog</h5>
                 </li>
