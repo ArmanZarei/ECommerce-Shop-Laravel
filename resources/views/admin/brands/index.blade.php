@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    All Brands
+    Brands
 @endsection
 
 @section('content')
@@ -30,6 +30,12 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if($attributes->isEmpty())
+                                <tr>
+                                    <td colspan="5" class="text-center pt-4 pb-4">No records found</td>
+                                </tr>
+                            @endif
+
                             @foreach($brands as $key => $brand)
                                 <tr>
                                     <td>{{ $brands->firstItem() + $key }}</td>
