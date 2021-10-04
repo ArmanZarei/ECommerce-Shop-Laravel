@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,5 @@ Route::get('/', function () {
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('brands', BrandController::class)->except(['destroy', 'show']);
     Route::resource('attributes', AttributeController::class)->except(['destroy', 'show']);
+    Route::resource('categories', CategoryController::class)->except(['destroy', 'show']);
 });
