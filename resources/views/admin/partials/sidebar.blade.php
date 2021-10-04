@@ -23,46 +23,22 @@
                     <h5>Shop</h5>
                 </li>
                 <li>
-                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#brands-collapse">
+                    <a href="{{ route('admin.brands.index') }}" class="nav-link d-flex align-items-center">
                         <i class="fad fa-trademark me-3 nav-item-icon"></i>
                         <span>Brands</span>
-                        <i class="fas fa-xs fa-chevron-right ms-auto"></i>
                     </a>
-                    <ul class="sidebar-sub-nav collapse" id="brands-collapse" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('admin.brands.index') }}" class="nav-link d-flex align-items-center">
-                                <i class="fad fa-list me-2 nav-item-icon"></i>
-                                <span>List</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.brands.create') }}" class="nav-link d-flex align-items-center">
-                                <i class="fa fa-plus me-2 nav-item-icon"></i>
-                                <span>Create</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
-                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#attributes-collapse">
+                    <a href="{{ route('admin.attributes.index') }}" class="nav-link d-flex align-items-center">
                         <i class="fad fa-list-alt me-3 nav-item-icon"></i>
                         <span>Attributes</span>
-                        <i class="fas fa-xs fa-chevron-right ms-auto"></i>
                     </a>
-                    <ul class="sidebar-sub-nav collapse" id="attributes-collapse" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('admin.attributes.index') }}" class="nav-link d-flex align-items-center">
-                                <i class="fad fa-list me-2 nav-item-icon"></i>
-                                <span>List</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.attributes.create') }}" class="nav-link d-flex align-items-center">
-                                <i class="fa fa-plus me-2 nav-item-icon"></i>
-                                <span>Create</span>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li>
+                    <a href="{{ route('admin.categories.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="fad fa-sitemap me-3 nav-item-icon"></i>
+                        <span>Categories</span>
+                    </a>
                 </li>
                 <li class="menu-section mt-5">
                     <h5>Blog</h5>
@@ -95,27 +71,6 @@
                         <i class="fas fa-xs fa-chevron-right ms-auto"></i>
                     </a>
                     <ul class="sidebar-sub-nav collapse" id="authors-collapse" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="#" class="nav-link d-flex align-items-center">
-                                <i class="fad fa-list me-2 nav-item-icon"></i>
-                                <span>List</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link d-flex align-items-center">
-                                <i class="fa fa-plus me-2 nav-item-icon"></i>
-                                <span>Create</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="nav-link d-flex align-items-center collapsed collapse-btn" data-bs-toggle="collapse" href="#categories-collapse">
-                        <i class="fad fa-sitemap me-3 nav-item-icon"></i>
-                        <span>Categories</span>
-                        <i class="fas fa-xs fa-chevron-right ms-auto"></i>
-                    </a>
-                    <ul class="sidebar-sub-nav collapse" id="categories-collapse" data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="#" class="nav-link d-flex align-items-center">
                                 <i class="fad fa-list me-2 nav-item-icon"></i>
