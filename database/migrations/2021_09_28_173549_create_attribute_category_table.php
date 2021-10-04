@@ -22,8 +22,6 @@ class CreateAttributeCategoryTable extends Migration
             $table->boolean('is_variation')->default(false);
 
             $table->primary(['attribute_id', 'category_id']);
-
-            $table->timestamps();
         });
     }
 
