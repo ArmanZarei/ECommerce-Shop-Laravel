@@ -40,6 +40,12 @@
                         <span>Categories</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.tags.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="fad fa-tags me-3 nav-item-icon"></i>
+                        <span>Tags</span>
+                    </a>
+                </li>
                 <li class="menu-section mt-5">
                     <h5>Blog</h5>
                 </li>
