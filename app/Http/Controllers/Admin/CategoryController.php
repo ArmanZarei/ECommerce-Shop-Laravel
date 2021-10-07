@@ -84,4 +84,9 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index');
     }
+
+    public function getAttributes(Category $category)
+    {
+        return $category->attributes()->withPivot('is_filter', 'is_variation')->get();
+    }
 }
