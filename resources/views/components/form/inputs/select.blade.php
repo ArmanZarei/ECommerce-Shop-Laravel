@@ -4,6 +4,7 @@
 <div class="input-relative position-relative">
     <span class="custom-span-input-label">{{ $label }}</span>
     <select class="selectpicker" data-live-search="true" name="{{ $name }}" {{ $multiple ? 'multiple' : '' }}>
+        <option value="">Nothing selected</option>
         @foreach($dataArray as $data)
             <option value="{{ $data->$dataValue }}" {{ $data->$dataValue == old($name) ? 'selected' : '' }}>{{ $data->$dataName }}</option>
         @endforeach
