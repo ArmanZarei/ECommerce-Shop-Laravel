@@ -388,7 +388,7 @@ main#main-page {
 .custom-form {
     color: #3F4254;
 }
-.custom-form input[type='text'], input[type='email'], input[type='password'] {
+.custom-form input[type='text'], .custom-form input[type='email'], .custom-form input[type='password'], .custom-form textarea {
     border: 2px solid #cfcfd9;
     outline: none;
 }
