@@ -5,7 +5,7 @@
     <span class="custom-span-input-label">{{ $label }}</span>
     <select class="selectpicker" data-live-search="true" name="{{ $name }}" {{ $multiselect ? 'multiselect' : '' }}>
         @foreach($dataArray as $data)
-            <option value="{{ $data->$dataValue }}" {{ $data->$dataValue == old('parent_id') ? 'selected' : '' }}>{{ $data->$dataName }}</option>
+            <option value="{{ $data->$dataValue }}" {{ $data->$dataValue == old($name) ? 'selected' : '' }}>{{ $data->$dataName }}</option>
         @endforeach
     </select>
 </div>
