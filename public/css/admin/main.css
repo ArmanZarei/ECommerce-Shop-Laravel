@@ -580,4 +580,6 @@ div.notify {
 .bootstrap-select .dropdown-item.selected {
     background: #eceff3;
 }
-
+.bootstrap-select .no-results {
+    background: white;
+}
