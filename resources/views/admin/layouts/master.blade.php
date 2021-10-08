@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/common/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common/fontawesome.min.css') }}">
     @notifyCss
-    @yield('styles')
+    @stack('styles')
     <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
 </head>
 <body>
