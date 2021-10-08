@@ -29,7 +29,7 @@
 <script src="{{ asset('js/common/bootstrap.bundle.min.js') }}"></script>
 @notifyJs
 <script src="{{ asset('js/common/main.js') }}"></script>
-@yield('scripts')
+@stack('scripts')
 
 </body>
 </html>
