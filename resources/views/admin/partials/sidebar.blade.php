@@ -46,6 +46,12 @@
                         <span>Tags</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.products.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="fad fa-box me-3 nav-item-icon"></i>
+                        <span>Products</span>
+                    </a>
+                </li>
                 <li class="menu-section mt-5">
                     <h5>Blog</h5>
                 </li>
