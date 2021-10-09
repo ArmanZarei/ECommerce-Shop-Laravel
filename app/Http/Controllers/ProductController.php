@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Rules\Admin\Product\TagIdsExist;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -22,18 +24,22 @@ class ProductController extends Controller
         $tags = Tag::all();
         $categories = Category::all();
         $brands = Brand::all();
+        $attributes = null;
+        if (old('category_id') && in_array(intval(old('category_id')), $categories->pluck('id')->toArray())) {
+            $attributes = $categories->where('id', intval(old('category_id')))->first()
+                                     ->attributes()->withPivot(['is_filter', 'is_variation'])->get();
+        }
+
+//        dd($attributes);
 
         return view(
             'admin.products.create',
-            compact('tags', 'categories', 'brands')
+            compact('tags', 'categories', 'brands', 'attributes')
         );
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-//        $request->validate([
-//            'main_image2' => 'required',
-//        ]);
         dd($request->all());
     }
 }

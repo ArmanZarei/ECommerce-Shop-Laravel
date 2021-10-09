@@ -50,6 +50,8 @@
 
 {{-- TODO: Clean Code !!! --}}
 
+@php($variationAttr = $attributes ? $attributes->where('pivot.is_variation', true)->first() : null)
+
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
@@ -58,26 +60,26 @@
         const categoryAttrUrl = '{{ route("api.category.attributes", ":id") }}';
         let productVariationCounter = 0;
 
-        function createAttrInputString(name, label, extraClasses="col-3 mb-3 bubble-animation") {
+        function createAttrInputString(name, label, extraClasses="col-3 mb-3 bubble-animation", value="") {
             return `<div class="input-container ${extraClasses}">
                         <div class="floating-label-container">
-                            <input type="text" name="${name}" autocomplete="off" placeholder=" ">
+                            <input type="text" name="${name}" autocomplete="off" placeholder=" " value="${value}">
                             <label>${label}</label>
                         </div>
                     </div>`;
         }
 
-        function createProductVariationForm() {
+        function createProductVariationForm(value="", price="", quantity="") {
             const pv =  $(`<div class="row product-variation ps-5 relative mb-3">
                                <i class="fal fa-times remove-product-variation btn-light-danger"></i>
                                <div class="col-3">
-                                   ${createAttrInputString(`product_variations[${productVariationCounter}][value]`, "Value", "")}
+                                   ${createAttrInputString(`product_variations[${productVariationCounter}][value]`, "Value", "", value)}
                                </div>
                                <div class="col-3">
-                                   ${createAttrInputString(`product_variations[${productVariationCounter}][price]`, "Price", "")}
+                                   ${createAttrInputString(`product_variations[${productVariationCounter}][price]`, "Price", "", price)}
                                </div>
                                <div class="col-3">
-                                   ${createAttrInputString(`product_variations[${productVariationCounter}][quantity]`, "Quantity", "")}
+                                   ${createAttrInputString(`product_variations[${productVariationCounter}][quantity]`, "Quantity", "", quantity)}
                                </div>
                            </div>`);
             pv.find('.remove-product-variation').on('click', function () {
@@ -157,6 +159,23 @@
                     dataTransfer.items.add(file)
                 $("#images-input").prop('files', dataTransfer.files);
             });
+
+            // --------------- Old Attribute Variation ------------- //
+            const variationAttr = @json($variationAttr);
+            const oldVariationAttrs = @json(old('product_variations'));
+            console.log(variationAttr);
+            console.log(oldVariationAttrs);
+            if (variationAttr && oldVariationAttrs)
+                for (let variationAttr of oldVariationAttrs) {
+                    productVariationsContainer.append(
+                        createProductVariationForm(
+                            variationAttr.value ?? '',
+                            variationAttr.price ?? '',
+                            variationAttr.quantity ?? ''
+                        )
+                    );
+                }
+
         });
     </script>
 @endpush
@@ -192,10 +211,19 @@
                                     <x-form.inputs.select name="category_id" label="Category" :dataArray="$categories"/>
                                 </div>
                             </div>
-                            <div class="row mb-3" id="category-attributes"></div>
-                            <div id="product-variations" class="mb-4 d-none">
+                            <div class="row mb-3" id="category-attributes">
+                            @if($attributes)
+                                @foreach($attributes->where('pivot.is_variation', false) as $attr)
+                                    <div class="input-container col-3 mb-3 bubble-animation">
+                                        <x-form.inputs.text :name='"attributes[$attr->id]"' :label="$attr->name" :value="old('attributes')[$attr->id]" />
+                                    </div>
+                                @endforeach
+                            @endif
+                            </div>
+
+                            <div id="product-variations" class="mb-4 {{ !$variationAttr ? "d-none" : '' }}">
                                 <div class="d-flex align-items-center mb-3">
-                                    <span class="me-2">Product Variations <strong id="pv-label"></strong></span>
+                                    <span class="me-2">Product Variations <strong id="pv-label">{{$variationAttr ? $variationAttr->name : ''}}</strong></span>
                                     <i class="fal fa-plus btn-light-success" id="add-product-variation"></i>
                                 </div>
                                 <div id="pvs-container">
