@@ -8,7 +8,7 @@
             <option value="">Nothing selected</option>
         @endunless
         @foreach($dataArray as $data)
-            @php($isSelected = $multiple ? in_array($data->$dataArray, old($name) ?? []) : $data->$dataValue == old($name))
+            @php($isSelected = $multiple ? in_array(strval($data->$dataValue), old(rtrim($name, "[]")) ?? []) : $data->$dataValue == old($name))
             <option value="{{ $data->$dataValue }}" {{ $isSelected ? 'selected' : '' }}>{{ $data->$dataName }}</option>
         @endforeach
     </select>
