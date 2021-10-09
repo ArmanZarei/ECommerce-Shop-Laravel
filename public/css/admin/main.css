@@ -583,6 +583,15 @@ div.notify {
 .bootstrap-select .no-results {
     background: white;
 }
+.has-error .bootstrap-select .dropdown-toggle {
+    border: none !important;
+}
+.input-select-container.has-error .dropdown.bootstrap-select{
+    border-color: #F64E60;
+}
+.input-select-container.has-error .custom-span-input-label {
+    color: #F64E60;
+}
 
 /************** Bubble Animation ***************/
 @keyframes bubbleAnimation{
