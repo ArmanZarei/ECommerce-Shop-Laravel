@@ -583,3 +583,16 @@ div.notify {
 .bootstrap-select .no-results {
     background: white;
 }
+
+/************** Bubble Animation ***************/
+@keyframes bubbleAnimation{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+.bubble-animation {
+    animation: bubbleAnimation 0.5s;
+}
