@@ -178,7 +178,7 @@
                                     <x-form.inputs.select name="brand_id" label="Brand" :dataArray="$brands"/>
                                 </div>
                                 <div class="col-4">
-                                    <x-form.inputs.select name="tag_ids[]" label="Tags" :dataArray="$tags" :multiple="true"/>
+                                    <x-form.inputs.select name="tag_ids" label="Tags" :dataArray="$tags" :multiple="true"/>
                                 </div>
                                 <div class="col-2 d-flex align-items-center justify-content-center">
                                     <x-form.inputs.switch name="is_active" label="Active"/>
