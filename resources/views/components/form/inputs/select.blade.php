@@ -4,9 +4,12 @@
 <div class="input-select-container position-relative {{ $errors->has($name) ? 'has-error' : '' }}">
     <span class="custom-span-input-label">{{ $label }}</span>
     <select class="selectpicker" data-live-search="true" name="{{ $name }}" {{ $multiple ? 'multiple' : '' }}>
-        <option value="">Nothing selected</option>
+        @unless($multiple)
+            <option value="">Nothing selected</option>
+        @endunless
         @foreach($dataArray as $data)
-            <option value="{{ $data->$dataValue }}" {{ $data->$dataValue == old($name) ? 'selected' : '' }}>{{ $data->$dataName }}</option>
+            @php($isSelected = $multiple ? in_array($data->$dataArray, old($name) ?? []) : $data->$dataValue == old($name))
+            <option value="{{ $data->$dataValue }}" {{ $isSelected ? 'selected' : '' }}>{{ $data->$dataName }}</option>
         @endforeach
     </select>
     @if($errors->has($name))
