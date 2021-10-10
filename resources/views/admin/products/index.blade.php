@@ -21,8 +21,10 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>NAME</th>
+                                <th>PRODUCT</th>
                                 <th>SLUG</th>
+                                <th>Brand</th>
+                                <th>Category</th>
                                 <th>ACTIVE</th>
                                 <th>CREATED AT</th>
                                 <th>UPDATED AT</th>
@@ -38,8 +40,15 @@
                             @foreach($products as $key => $product)
                                 <tr>
                                     <td>{{ $products->firstItem() + $key }}</td>
-                                    <td>{{ $product->name }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ asset('storage/'.$product->primary_image) }}" alt="{{ $product->name }} primary image" height="70" width="70" class="me-2">
+                                            <span>{{ $product->name }}</span>
+                                        </div>
+                                    </td>
                                     <td>{{ $product->slug }}</td>
+                                    <td>{{ $product->brand->name }}</td>
+                                    <td>{{ $product->category->name }}</td>
                                     <td>
                                         <div class="d-flex align-items-center {{ $product->is_active ? "custom-text-primary" : "custom-text-danger" }}">
                                             <i class="fa fa-circle me-1" style="font-size: 8px"></i>
