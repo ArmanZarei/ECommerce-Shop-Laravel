@@ -10,8 +10,7 @@
         i.remove-product-variation {
             position: absolute;
             left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 11px;
             font-size: 20px;
             width: auto;
             padding: 4px 7px;
@@ -58,7 +57,7 @@
 
     <script>
         const categoryAttrUrl = '{{ route("api.category.attributes", ":id") }}';
-        let productVariationCounter = 0;
+        let productVariationCounter = @json(old('product_variations') ? sizeof(old('product_variations')) : 0);
 
         function createAttrInputString(name, label, extraClasses="col-3 mb-3 bubble-animation", value="") {
             return `<div class="input-container ${extraClasses}">
@@ -160,22 +159,9 @@
                 $("#images-input").prop('files', dataTransfer.files);
             });
 
-            // --------------- Old Attribute Variation ------------- //
-            const variationAttr = @json($variationAttr);
-            const oldVariationAttrs = @json(old('product_variations'));
-            console.log(variationAttr);
-            console.log(oldVariationAttrs);
-            if (variationAttr && oldVariationAttrs)
-                for (let variationAttr of oldVariationAttrs) {
-                    productVariationsContainer.append(
-                        createProductVariationForm(
-                            variationAttr.value ?? '',
-                            variationAttr.price ?? '',
-                            variationAttr.quantity ?? ''
-                        )
-                    );
-                }
-
+            $('.remove-product-variation').on('click', function () {
+                $(this).parent('.product-variation').remove();
+            });
         });
     </script>
 @endpush
@@ -214,8 +200,8 @@
                             <div class="row mb-3" id="category-attributes">
                             @if($attributes)
                                 @foreach($attributes->where('pivot.is_variation', false) as $attr)
-                                    <div class="input-container col-3 mb-3 bubble-animation">
-                                        <x-form.inputs.text :name='"attributes[$attr->id]"' :label="$attr->name" :value="old('attributes')[$attr->id]" />
+                                    <div class="input-container col-3 mb-3">
+                                        <x-form.inputs.text :name='"attributes[$attr->id]"' :label="$attr->name" :value="old('attributes')[$attr->id]" :error-key='"attributes.$attr->id"' />
                                     </div>
                                 @endforeach
                             @endif
@@ -227,7 +213,26 @@
                                     <i class="fal fa-plus btn-light-success" id="add-product-variation"></i>
                                 </div>
                                 <div id="pvs-container">
+                                    @if ($errors->has('product_variations'))
+                                        <p class="input-error">{{ $errors->first('product_variations') }}</p>
+                                    @endif
 
+                                    @if ($variationAttr && old('product_variations'))
+                                        @foreach(old('product_variations') as $k => $productVariation)
+                                            <div class="row product-variation ps-5 relative mb-3">
+                                                <i class="fal fa-times remove-product-variation btn-light-danger"></i>
+                                                <div class="col-3">
+                                                    <x-form.inputs.text :name='"product_variations[$loop->index][value]"' label="Value" :value="old('product_variations')[$k]['value']" :error-key='"product_variations.$k.value"' />
+                                                </div>
+                                                <div class="col-3">
+                                                    <x-form.inputs.text :name='"product_variations[$loop->index][price]"' label="Price" :value="old('product_variations')[$k]['price']" :error-key='"product_variations.$k.price"' />
+                                                </div>
+                                                <div class="col-3">
+                                                    <x-form.inputs.text :name='"product_variations[$loop->index][quantity]"' label="Quantity" :value="old('product_variations')[$k]['quantity']" :error-key='"product_variations.$k.quantity"' />
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
 
