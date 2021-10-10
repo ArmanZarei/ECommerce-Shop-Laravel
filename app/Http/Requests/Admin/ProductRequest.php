@@ -37,6 +37,7 @@ class ProductRequest extends FormRequest
             'name' => 'required|string',
             'brand_id' => 'nullable|exists:brands,id',
             'tag_ids' => ['nullable', 'array', new TagIdsExist],
+            'is_active' => 'required|boolean',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'attributes.*' => 'required',
