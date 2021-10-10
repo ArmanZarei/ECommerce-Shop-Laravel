@@ -250,7 +250,11 @@
                                         <span>Other Images</span>
                                         <i class="fal fa-plus btn-light-primary" id="add-product-images"></i>
                                     </d>
-                                    <div class="row mt-4" id="product-images-container"></div>
+                                    <div class="row mt-4" id="product-images-container">
+                                        @if($errors->has('images'))
+                                            <p class="input-error mb-4">{{ $errors->first('images') }}</p>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <input type="file" class="hidden" id="images-input" multiple name="images[]">
