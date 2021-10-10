@@ -20,8 +20,6 @@ class CreateProductTagTable extends Migration
             $table->foreign('tag_id')->references('id')->on('tags');
 
             $table->primary(['product_id', 'tag_id']);
-
-            $table->timestamps();
         });
     }
 
