@@ -20,4 +20,28 @@ class Product extends Model
             ]
         ];
     }
+
+    public function images() {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'product_attributes')->withTimestamps();
+    }
+
+    public function variations()
+    {
+        return $this->hasMany(ProductVariation::class);
+    }
 }
