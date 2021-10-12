@@ -605,3 +605,41 @@ div.notify {
 .bubble-animation {
     animation: bubbleAnimation 0.5s;
 }
+
+
+/************** Custom Pagination ***************/
+.custom-pagination .page-item .page-link {
+    border-radius: 5px;
+    font-weight: 500;
+    color: #7E8299;
+    border: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: unset;
+    font-size: 13px;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.custom-pagination .page-item:not(:last-of-type) {
+    margin-right: 5px;
+}
+.custom-pagination .page-item .page-link:hover {
+    color: #fff !important;
+    background-color: #3699FF !important;
+}
+.custom-pagination .page-item.active .page-link {
+    color: #fff;
+    background-color: #3699FF;
+    border: none;
+}
+.custom-pagination .page-item .page-link[rel="prev"], .custom-pagination .page-item .page-link[rel="next"] {
+    background: #e0e5ea;
+    font-size: 22px;
+}
+.custom-pagination .page-item.disabled .page-link  {
+    background: #ecf1f6;
+    font-size: 22px;
+}

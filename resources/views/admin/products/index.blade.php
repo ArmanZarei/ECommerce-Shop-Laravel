@@ -124,6 +124,9 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="custom-pagination mt-4">
+                            {{ $products->render() }}
+                        </div>
                     </div>
                 </div>
             </div>
