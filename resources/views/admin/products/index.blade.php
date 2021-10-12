@@ -99,7 +99,7 @@
                                     <td>{{ $products->firstItem() + $key }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset('storage/'.$product->primary_image) }}" alt="{{ $product->name }} primary image" height="70" width="70" class="me-2">
+                                            <img src="{{ asset('storage/'.env('PRODUCT_IMAGES_PATH').$product->primary_image) }}" alt="{{ $product->name }} primary image" height="70" width="70" class="me-2">
                                             <span>{{ $product->name }}</span>
                                         </div>
                                     </td>

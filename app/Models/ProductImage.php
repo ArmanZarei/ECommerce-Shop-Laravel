@@ -13,6 +13,6 @@ class ProductImage extends Model
 
     public function getImageAttribute($image)
     {
-        return asset('storage/'.$image);
+        return asset('storage/'.env('PRODUCT_IMAGES_PATH').$image);
     }
 }

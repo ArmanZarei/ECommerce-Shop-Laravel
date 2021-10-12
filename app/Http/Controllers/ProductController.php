@@ -42,18 +42,18 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $primaryImagePath = $request->file('main_image')->store(env('PRODUCT_IMAGES_PATH'));
+        $primaryImagePath = $request->file('main_image')->store('public/'.env('PRODUCT_IMAGES_PATH'));
         $product = Product::create(array_merge(
             $request->only('name', 'description', 'brand_id', 'category_id', 'is_active'),
-            ['primary_image' => $primaryImagePath],
+            ['primary_image' => basename($primaryImagePath)],
         ));
 
         $productImagesArr = array_map(function (UploadedFile $image) use ($product) {
-            $imagePath = $image->store(env('PRODUCT_IMAGES_PATH'));
+            $imagePath = $image->store('public/'.env('PRODUCT_IMAGES_PATH'));
 
             return [
                 'product_id' => $product->id,
-                'image' => $imagePath,
+                'image' => basename($imagePath),
             ];
         }, $request->images);
         $productImages = $product->images()->createMany($productImagesArr);
