@@ -4,7 +4,64 @@
     Products
 @endsection
 
+@push('styles')
+    <style>
+        .product-gallery-image {
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            float: left;
+            margin: 10px;
+            box-shadow: 0 0.5rem 1.5rem 0.5rem #e1e1e1;
+            border-radius: 5px;
+            background: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script>
+        const $productImages = @json(array_combine($products->pluck('id')->toArray(), $products->pluck('images.*.image')->toArray()));
+        const $productImagesMap = new Map(Object.entries($productImages));
+
+        const mainModal = new bootstrap.Modal(document.getElementById('mainModal'));
+        const mainModalTitle = document.getElementById('mainModalLabel');
+        const mainModalBody = document.querySelector('#mainModal .modal-body');
+        function openModal(title, content) {
+            mainModalTitle.innerText = title;
+            mainModalBody.innerHTML = content;
+            mainModal.show();
+        }
+
+        $(document).ready(function () {
+            $('.show-gallery-btn').on('click', function (e) {
+                e.preventDefault();
+
+                const imagesUrl = $productImagesMap.get($(this).data('pid').toString());
+                let images = imagesUrl.reduce((prev, url) => prev + `<div class="product-gallery-image"><img src="${url}" /></div>`, '');
+                if (images === '')
+                    images = '<p class="alert alert-warning">No image found</p>'
+                openModal('Image Gallery', images);
+            });
+        });
+    </script>
+@endpush
+
 @section('content')
+    <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mainModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid p-4 rounded-2">
         <div class="row">
             <div class="col-12">
@@ -60,6 +117,7 @@
                                     <td>
                                         <div class="cell-actions">
                                             <a href="{{ route('admin.products.edit', $product->id) }}" title="edit"><i class="fad fa-edit"></i></a>
+                                            <a href="#" class="show-gallery-btn" data-pid="{{ $product->id }}" title="Image Gallery"><i class="fas fa-images"></i></a>
                                         </div>
                                     </td>
                                 </tr>
