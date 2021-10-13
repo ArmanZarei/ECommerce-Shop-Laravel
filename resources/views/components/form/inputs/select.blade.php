@@ -1,4 +1,4 @@
-@props(['name', 'dataArray', 'multiple' => false, 'dataValue' => 'id', 'dataName' => 'name', 'label' => null])
+@props(['name', 'dataArray', 'multiple' => false, 'dataValue' => 'id', 'dataName' => 'name', 'label' => null, 'value' => null])
 @php($label = $label ?? ucwords($name))
 
 <div class="input-select-container position-relative {{ $errors->has($name) ? 'has-error' : '' }}">
@@ -8,7 +8,8 @@
             <option value="">Nothing selected</option>
         @endunless
         @foreach($dataArray as $data)
-            @php($isSelected = $multiple ? in_array(strval($data->$dataValue), old($name) ?? []) : $data->$dataValue == old($name))
+            @php($val = old($name) ?? $value)
+            @php($isSelected = $multiple ? in_array(strval($data->$dataValue), $val ?? []) : $data->$dataValue == $val)
             <option value="{{ $data->$dataValue }}" {{ $isSelected ? 'selected' : '' }}>{{ $data->$dataName }}</option>
         @endforeach
     </select>
