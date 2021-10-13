@@ -173,7 +173,6 @@
                 <div class="card border-0 bg-white rounded-2">
                     <h5 class="card-header bg-white">Create product</h5>
                     <div class="card-body">
-                        <form action="" ></form>
                         <x-form.form action="{{ route('admin.products.store') }}" class="me-5 ms-5 mt-2" enctype="multipart/form-data" id="create-form">
                             <div class="row mb-4">
                                 <div class="col-3">
