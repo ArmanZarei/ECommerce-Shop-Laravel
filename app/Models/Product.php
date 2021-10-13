@@ -49,4 +49,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariation::class);
     }
+
+    public function getPrimaryImageAttribute($primaryImage)
+    {
+        return asset('storage/'.env('PRODUCT_IMAGES_PATH').$primaryImage);
+    }
 }
