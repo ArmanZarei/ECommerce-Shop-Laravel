@@ -16,7 +16,7 @@
 
 <div class="d-flex">
     @include('admin.partials.sidebar')
-    <div class="flex-grow-1" style="background: #EEF0F8;">
+    <div class="flex-grow-1" style="background: #EEF0F8; height: 100vh; overflow: scroll;">
         @include('admin.partials.top_nav')
         <div class="container-fluid p-4 rounded-2">
             @yield('content')
