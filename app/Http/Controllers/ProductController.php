@@ -51,7 +51,7 @@ class ProductController extends Controller
         );
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request) // TODO: Use Services instead ...
     {
         $primaryImagePath = $request->file('main_image')->store('public/'.env('PRODUCT_IMAGES_PATH'));
         $product = Product::create(array_merge(
