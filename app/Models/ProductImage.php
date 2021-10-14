@@ -11,8 +11,8 @@ class ProductImage extends Model
 
     protected $guarded = ['id'];
 
-    public function getImageAttribute($image)
+    public function getImageUrlAttribute()
     {
-        return asset('storage/'.env('PRODUCT_IMAGES_PATH').$image);
+        return asset('storage/'.env('PRODUCT_IMAGES_PATH').$this->image);
     }
 }

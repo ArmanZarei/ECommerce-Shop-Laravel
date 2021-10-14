@@ -42,7 +42,7 @@ class Product extends Model
 
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'product_attributes')->withTimestamps();
+        return $this->belongsToMany(Attribute::class, 'product_attributes')->withPivot(['value', 'is_active'])->withTimestamps();
     }
 
     public function variations()
@@ -50,8 +50,8 @@ class Product extends Model
         return $this->hasMany(ProductVariation::class);
     }
 
-    public function getPrimaryImageAttribute($primaryImage)
+    public function getPrimaryImageUrlAttribute()
     {
-        return asset('storage/'.env('PRODUCT_IMAGES_PATH').$primaryImage);
+        return asset('storage/'.env('PRODUCT_IMAGES_PATH').$this->primary_image);
     }
 }

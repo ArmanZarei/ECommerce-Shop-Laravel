@@ -1,4 +1,4 @@
-@props(['name'])
+@props(['name', 'value' => null])
 
 @once
     @push('styles')
@@ -59,8 +59,8 @@
 <div class="image-input-container {{ $errors->has($name) ? 'has-error' : '' }}">
     <input type="file" accept=".png, .jpg, .jpeg" name="{{ $name }}" class="hidden">
     <i class="image-input-action image-input-change fa fa-pen"></i>
-    <i class="image-input-action image-input-remove fa fa-times hidden"></i>
-    <img src="https://www.timesquare-cologne.de/wp-content/uploads/2014/09/default-placeholder.jpg">
+    <i class="image-input-action image-input-remove fa fa-times {{ !$value ? 'hidden' : '' }}"></i>
+    <img src="{{ $value ?? "https://www.timesquare-cologne.de/wp-content/uploads/2014/09/default-placeholder.jpg" }}">
     @if($errors->has($name))
         <p class="input-error">{{ $errors->first($name) }}</p>
     @endif

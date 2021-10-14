@@ -24,7 +24,7 @@
 
 @push('scripts')
     <script>
-        const $productImages = @json(array_combine($products->pluck('id')->toArray(), $products->pluck('images.*.image')->toArray()));
+        const $productImages = @json(array_combine($products->pluck('id')->toArray(), $products->pluck('images.*.imageUrl')->toArray()));
         const $productImagesMap = new Map(Object.entries($productImages));
 
         const mainModal = new bootstrap.Modal(document.getElementById('mainModal'));
@@ -99,7 +99,7 @@
                                     <td>{{ $products->firstItem() + $key }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ $product->primary_image }}" alt="{{ $product->name }} primary image" height="70" width="70" class="me-2">
+                                            <img src="{{ $product->primaryImageUrl }}" alt="{{ $product->name }} primary image" height="70" width="70" class="me-2">
                                             <span>{{ $product->name }}</span>
                                         </div>
                                     </td>
