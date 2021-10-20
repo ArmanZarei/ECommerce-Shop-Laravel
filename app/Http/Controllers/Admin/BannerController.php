@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\Banner\CreateRequest;
 use App\Http\Requests\Admin\Banner\UpdateRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -34,7 +33,7 @@ class BannerController extends Controller
 
     public function destroy(Banner $banner)
     {
-        Storage::delete('public/'.env('BANNER_IMAGES_PATH').$banner->image);
+        $banner->deleteImageFile();
         $banner->delete();
 
         notify()->success("Banner successfully deleted.");
@@ -51,7 +50,7 @@ class BannerController extends Controller
     {
         $imageRequest = [];
         if ($request->has('image')) {
-            Storage::delete('public/'.env('BANNER_IMAGES_PATH').$banner->image);
+            $banner->deleteImageFile();
             $imagePath = $request->file('image')->store('public/'.env('BANNER_IMAGES_PATH'));
             $imageRequest['image'] = basename($imagePath);
         }
