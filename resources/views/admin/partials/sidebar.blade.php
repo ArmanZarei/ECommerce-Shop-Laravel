@@ -52,6 +52,16 @@
                         <span>Products</span>
                     </a>
                 </li>
+                <li class="menu-section">
+                    <h5>Setting</h5>
+                </li>
+                <li>
+                    <a href="{{ route('admin.banners.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="fad fa-images me-3 nav-item-icon"></i>
+                        <span>Banners</span>
+                    </a>
+                </li>
+
                 <li class="menu-section mt-5">
                     <h5>Blog</h5>
                 </li>
@@ -186,6 +196,12 @@
                     <a href="#" class="nav-link d-flex align-items-center">
                         <i class="fad fa-cogs me-3 nav-item-icon"></i>
                         <span>General Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link d-flex align-items-center">
+                        <i class="fad fa-sliders-v-square me-3 nav-item-icon"></i>
+                        <span>Setting 2</span>
                     </a>
                 </li>
                 <li>
