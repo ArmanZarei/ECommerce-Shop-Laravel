@@ -37,13 +37,6 @@
                 $('#filterable-attributes').selectpicker('refresh');
                 $('#variation-attribute').selectpicker('refresh');
             })
-
-            let iconPreviewTimeoutID = null;
-            $('input[name="icon"]').on('input', function () {
-                const val = $(this).val()
-                clearTimeout(iconPreviewTimeoutID);
-                iconPreviewTimeoutID = setTimeout(() => $('#icon-preview').html(`<i class="${val} fa-2x"></i>`), 500);
-            });
         });
     </script>
 @endpush
@@ -59,79 +52,59 @@
                             @csrf
                             <div class="row mb-4">
                                 <div class="col-4">
-                                    <div class="floating-label-container">
-                                        <input type="text" name="name" autocomplete="off" placeholder=" " class="{{ $errors->has('name') ? 'has-error' : '' }}" value="{{ old('name') }}">
-                                        <label>Name</label>
-                                    </div>
-                                    @if($errors->has('name'))
-                                        <p class="input-error">{{ $errors->first('name') }}</p>
-                                    @endif
+                                    <x-form.inputs.text name="name"/>
                                 </div>
                                 <div class="col-4">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div class="floating-label-container">
-                                                <input type="text" name="icon" autocomplete="off" placeholder=" " value="{{ old('icon') }}">
-                                                <label>Icon</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center justify-content-start" id="icon-preview">
-                                            @if(old('icon'))
-                                                <i class="{{ old('icon') }} fa-2x"></i>
-                                            @else
-                                                <i class="fad fa-engine-warning fa-2x" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Use Fontawesome classes"></i>
-                                            @endif
-                                        </div>
-                                    </div>
+                                    <x-form.inputs.icon name="icon" />
                                 </div>
                                 <div class="col-4 position-relative">
-                                    <span class="custom-span-input-label">Parent</span>
-                                    <select class="selectpicker" data-live-search="true" name="parent_id">
-                                        <option value="" selected>No parent</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ $category->id == old('parent_id') ? 'selected' : '' }}>{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <x-form.inputs.select name="parent_id" label="Parent" :dataArray="$categories"/>
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <div class="col-4 position-relative">
-                                    <span class="custom-span-input-label">Attributes</span>
-                                    <select id="attributes" class="selectpicker" data-live-search="true" name="attributes[]" multiple>
-                                        @php($oldAttrIds = old('attributes') ?? [])
-                                        @foreach($attributes as $attribute)
-                                            <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $oldAttrIds) ? 'selected' : '' }}>{{ $attribute->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-4">
+                                    <div class="position-relative">
+                                        <span class="custom-span-input-label">Attributes</span>
+                                        <select id="attributes" class="selectpicker" data-live-search="true" name="attributes[]" multiple>
+                                            @php($oldAttrIds = old('attributes') ?? [])
+                                            @foreach($attributes as $attribute)
+                                                <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $oldAttrIds) ? 'selected' : '' }}>{{ $attribute->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 @php($oldAttrs = $attributes->whereIn('id', array_map('intval', $oldAttrIds)))
-                                <div class="col-4 position-relative">
-                                    <span class="custom-span-input-label">Filterable Attributes</span>
-                                    <select id="filterable-attributes" class="selectpicker" data-live-search="true" name="filterable_attributes[]" multiple>
-                                        @php($oldFilterableAttrs = old('filterable_attributes') ?? [])
-                                        @foreach($oldAttrs as $attribute)
-                                            <option
-                                                value="{{ $attribute->id }}"
-                                                {{ in_array($attribute->id, $oldFilterableAttrs) ? 'selected' : '' }}
-                                            >
-                                                {{ $attribute->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-4">
+                                    <div class="position-relative">
+                                        <span class="custom-span-input-label">Filterable Attributes</span>
+                                        <select id="filterable-attributes" class="selectpicker" data-live-search="true" name="filterable_attributes[]" multiple>
+                                            @php($oldFilterableAttrs = old('filterable_attributes') ?? [])
+                                            @foreach($oldAttrs as $attribute)
+                                                <option
+                                                    value="{{ $attribute->id }}"
+                                                    {{ in_array($attribute->id, $oldFilterableAttrs) ? 'selected' : '' }}
+                                                >
+                                                    {{ $attribute->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-4 position-relative">
-                                    <span class="custom-span-input-label">Variation Attribute</span>
-                                    <select id="variation-attribute" class="selectpicker" data-live-search="true" name="variation_attribute">
-                                        <option value="">No variation attribute</option>
-                                        @foreach($oldAttrs as $attribute)
-                                            <option
-                                                value="{{ $attribute->id }}"
-                                                {{ $attribute->id == old('variation_attribute') ? 'selected' : '' }}
-                                            >
-                                                {{ $attribute->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-4">
+                                    <div class="position-relative">
+                                        <span class="custom-span-input-label">Variation Attribute</span>
+                                        <select id="variation-attribute" class="selectpicker" data-live-search="true" name="variation_attribute">
+                                            <option value="">No variation attribute</option>
+                                            @foreach($oldAttrs as $attribute)
+                                                <option
+                                                    value="{{ $attribute->id }}"
+                                                    {{ $attribute->id == old('variation_attribute') ? 'selected' : '' }}
+                                                >
+                                                    {{ $attribute->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-4">
