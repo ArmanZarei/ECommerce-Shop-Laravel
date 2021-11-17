@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;
@@ -19,9 +20,7 @@ use App\Http\Controllers\Admin\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.layouts.master');
-});
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
 
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('brands', BrandController::class)->except(['destroy', 'show']);
