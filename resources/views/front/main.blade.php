@@ -18,7 +18,14 @@
                             <li class="list-group-item d-flex justify-content-between"><span>Category</span><span>{{ $product->category->name }}</span></li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" class="card-link btn btn-outline-primary">Details</a>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="#" class="card-link btn btn-outline-primary">Details</a>
+                                @if($variation = $product->availableVariation)
+                                    <span class="text-success"><i class="fa fa-dollar-sign"></i> {{ number_format($variation->price) }}</span>
+                                @else
+                                    <span class="text-danger">Out of stock</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

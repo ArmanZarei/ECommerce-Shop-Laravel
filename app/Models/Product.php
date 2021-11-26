@@ -12,6 +12,8 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['is_available'];
+
     public function sluggable(): array
     {
         return [
@@ -53,5 +55,15 @@ class Product extends Model
     public function getPrimaryImageUrlAttribute()
     {
         return asset('storage/'.env('PRODUCT_IMAGES_PATH').$this->primary_image);
+    }
+
+    public function getAvailableVariationAttribute()
+    {
+        return $this->variations->where('quantity', '>', 0)->sortBy('price')->first();
+    }
+
+    public function getIsAvailableAttribute()
+    {
+        return $this->availableVariation != null;
     }
 }

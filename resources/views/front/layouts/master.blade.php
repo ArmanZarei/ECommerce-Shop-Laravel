@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>eCommerce Shop - @yield('title')</title>
 
+    <link rel="stylesheet" href="{{ asset('css/common/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common/bootstrap.min.css') }}">
     @stack('styles')
 </head>
