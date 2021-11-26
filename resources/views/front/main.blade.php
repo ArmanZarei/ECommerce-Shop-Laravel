@@ -19,7 +19,7 @@
                         </ul>
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
-                                <a href="#" class="card-link btn btn-outline-primary">Details</a>
+                                <a href="{{ route('front.product.show', $product->id) }}" class="card-link btn btn-outline-primary">Details</a>
                                 @if($variation = $product->availableVariation)
                                     <span class="text-success"><i class="fa fa-dollar-sign"></i> {{ number_format($variation->price) }}</span>
                                 @else

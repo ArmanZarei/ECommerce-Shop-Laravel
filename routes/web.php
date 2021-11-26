@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Front\ProductController as FrontProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\CategoryController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/products/{product}', [FrontProductController::class, 'show'])->name('front.product.show');
 
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('brands', BrandController::class)->except(['destroy', 'show']);
