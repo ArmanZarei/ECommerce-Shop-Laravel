@@ -8,7 +8,32 @@
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4 p-4">
-                    <img src="{{ $product->primaryImageUrl }}" class="img-fluid rounded-start" alt="...">
+                    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            @for($i = 1; $i <= sizeof($product->images); $i++)
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ $i }}" aria-label="Slide {{ $i }}"></button>
+                            @endfor
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active p-5">
+                                <img src="{{ $product->primaryImageUrl }}" class="d-block w-100" alt="Product Primary Image">
+                            </div>
+                            @foreach($product->images as $image)
+                                <div class="carousel-item p-5">
+                                    <img src="{{ $image->imageUrl }}" class="d-block w-100" alt="Product Image">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
