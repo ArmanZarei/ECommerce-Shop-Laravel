@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,5 +66,12 @@ class Product extends Model
     public function getIsAvailableAttribute()
     {
         return $this->availableVariation != null;
+    }
+
+    public function scopeSearchName(Builder $query, $s)
+    {
+        if (trim($s))
+            return $query->where('name', 'LIKE', "%".trim($s)."%");
+        return $s;
     }
 }
