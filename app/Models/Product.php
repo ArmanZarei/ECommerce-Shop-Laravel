@@ -93,4 +93,17 @@ class Product extends Model
                 });
             }
         });
-    }}
+    }
+
+    public function scopeFilterVariations(Builder $query, $variations)
+    {
+        if (!$variations)
+            return;
+        $query->whereHas('variations', function (Builder $query) use ($variations) {
+            foreach ($variations as $k => $variation) {
+                $whereStr = $k == 0 ? 'where' : 'orWhere';
+                $query->$whereStr('value', $variation);
+            }
+        });
+    }
+}
