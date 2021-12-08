@@ -74,4 +74,23 @@ class Product extends Model
             return $query->where('name', 'LIKE', "%".trim($s)."%");
         return $s;
     }
-}
+
+    public function scopeFilterAttributes(Builder $query, $attributes)
+    {
+        if (!$attributes)
+            return;
+        $query->whereHas('attributes', function (Builder $query) use ($attributes) {
+            $i = 0;
+            foreach ($attributes as $attributeId => $attributeValues) {
+                $whereStr = $i++ == 0 ? 'where' : 'orWhere';
+                $query->$whereStr(function (Builder $query) use ($attributeValues, $attributeId) {
+                    $query->where('attribute_id', $attributeId)->where(function (Builder $query) use($attributeValues) {
+                        foreach ($attributeValues as $k => $attributeValue) {
+                            $whereStr = $k == 0 ? 'where' : 'orWhere';
+                            $query->$whereStr('value', $attributeValue);
+                        }
+                    });
+                });
+            }
+        });
+    }}
