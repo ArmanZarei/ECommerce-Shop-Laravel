@@ -6,27 +6,43 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-3">
-                @foreach($filterableAttributes as $attr)
-                    <h5>{{ $attr->name }}</h5>
-                    <div class="ms-3">
-                        @foreach($attr->values as $val)
-                            <input type="checkbox" id="{{ $attr->id.'-'.$val->value }}" class="mt-2">
-                            <label for="{{ $attr->id.'-'.$val->value }}">{{ $val->value }}</label>
-                            <br>
-                        @endforeach
+                <h4 class="text-center mb-4 border-bottom pb-3">Search and Filter</h4>
+                <form method="GET">
+                    <input class="form-control mb-3" type="text" name="name"
+                           placeholder="Search by name ..." autocomplete="off" value="{{ request()->get('name') }}">
+                    <select class="form-select mb-3" name="sort_by">
+                        <option value="" selected>Order by</option>
+                        <option value="latest" {{ request('sort_by') == 'latest' ? 'selected' : '' }}>Latest</option>
+                        <option value="most_expensive" {{ request('sort_by') == 'most_expensive' ? 'selected' : '' }}>Most expensive</option>
+                        <option value="cheapest" {{ request('sort_by') == 'cheapest' ? 'selected' : '' }}>Cheapest</option>
+                    </select>
+                    @foreach($filterableAttributes as $attr)
+                        <h5>{{ $attr->name }}</h5>
+                        <div class="ms-3">
+                            @foreach($attr->values as $val)
+                                <input type="checkbox" name="attributes[{{ $attr->id }}][]" value="{{ $val->value }}"
+                                       id="{{ $attr->id.'-'.$val->value }}" class="mt-2" {{ in_array($val->value, request('attributes.'.$attr->id) ?? []) ? 'checked' : '' }}>
+                                <label for="{{ $attr->id.'-'.$val->value }}">{{ $val->value }}</label>
+                                <br>
+                            @endforeach
+                        </div>
+                        <hr>
+                    @endforeach
+                    @if($variation)
+                        <h5>{{ $variation->name }}</h5>
+                        <div class="ms-3">
+                            @foreach($variation->variationValues as $val)
+                                <input type="checkbox" name="variations[]" value="{{ $val->value }}"
+                                       id="{{ $attr->id.'-'.$val->value }}" class="mt-2" {{ in_array($val->value, request('variations') ?? []) ? 'checked' : '' }}>
+                                <label for="{{ $attr->id.'-'.$val->value }}">{{ $val->value }}</label>
+                                <br>
+                            @endforeach
+                        </div>
+                    @endif
+                    <div class="d-grid">
+                        <button class="btn btn-outline-primary mt-4">Search and Filter</button>
                     </div>
-                    <hr>
-                @endforeach
-                @if($variation)
-                    <h5>{{ $variation->name }}</h5>
-                    <div class="ms-3">
-                        @foreach($variation->variationValues as $val)
-                            <input type="checkbox" id="{{ $attr->id.'-'.$val->value }}" class="mt-2">
-                            <label for="{{ $attr->id.'-'.$val->value }}">{{ $val->value }}</label>
-                            <br>
-                        @endforeach
-                    </div>
-                @endif
+                </form>
             </div>
             <div class="col-9">
                 <div class="row">
