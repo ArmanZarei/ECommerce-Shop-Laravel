@@ -106,4 +106,21 @@ class Product extends Model
             }
         });
     }
+
+    public function scopeOrderByCustom(Builder $query, $orderBy)
+    {
+        switch (trim(strtolower($orderBy))) {
+            case 'latest':
+                $query->latest();
+                break;
+            case 'most_expensive':
+                $query->orderByDesc(
+                    ProductVariation::select('price')->whereColumn('product_variations.product_id', 'products.id')->orderBy('price')->take(1)
+                );
+            case 'cheapest':
+                $query->orderBy(
+                    ProductVariation::select('price')->whereColumn('product_variations.product_id', 'products.id')->orderBy('price', 'desc')->take(1)
+                );
+        }
+    }
 }
