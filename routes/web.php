@@ -22,7 +22,7 @@ use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{product}', [FrontProductController::class, 'show'])->name('front.product.show');
 Route::get('/categories/{category:slug}', [FrontCategoryController::class, 'show'])->name('front.category.show');
 
