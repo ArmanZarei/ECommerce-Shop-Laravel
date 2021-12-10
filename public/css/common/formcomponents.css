@@ -1,0 +1,222 @@
+/************** General ******************/
+.no-duration {
+    transition-duration: 0s;
+}
+
+/************** Button Styles ***************/
+.btn-style-1 {
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: none !important;
+}
+.btn-light-success {
+    color: #1BC5BD;
+    background-color: #C9F7F5;
+}
+.btn-light-success:hover {
+    color: #ffffff;
+    background-color: #1BC5BD;
+}
+.btn-light-primary {
+    color: #3699FF;
+    background-color: #E1F0FF;
+}
+.btn-light-primary:hover {
+    color: #FFFFFF;
+    background-color: #3699FF;
+}
+.btn-light-danger {
+    color: #F64E60;
+    background-color: #FFE2E5;
+}
+.btn-light-danger:hover {
+    color: #ffffff;
+    background-color: #F64E60;
+}
+.btn-light-warning {
+    color: #FFA800;
+    background-color: #FFF4DE;
+}
+.btn-light-warning:hover {
+    color: #ffffff;
+    background-color: #FFA800;
+}
+.btn-light-dark {
+    color: #181C32;
+    background-color: #D1D3E0;
+}
+.btn-light-dark:hover {
+    color: #ffffff;
+    background-color: #181C32;
+}
+
+/************** Form ***************/
+.custom-form {
+    color: #3F4254;
+}
+.custom-form input[type='text'], .custom-form input[type='email'], .custom-form input[type='password'], .custom-form textarea {
+    border: 2px solid #cfcfd9;
+    outline: none;
+}
+.input-error {
+    color: #F64E60;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 2px;
+}
+.custom-span-input-label {
+    position: absolute;
+    top: 0;
+    left: 7px;
+    z-index: 10;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 5px;
+    color: #B5B5C3;
+    pointer-events: none;
+}
+
+/************** Floating Label ***************/
+.floating-label-container {
+    position: relative;
+    width: 100%;
+}
+.floating-label-container input, .floating-label-container textarea {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    z-index: 1;
+    outline: none;
+    border-radius: 4px;
+    transition-duration: 0.1s;
+    box-shadow: none !important;
+}
+.floating-label-container input::placeholder, .floating-label-container textarea::placeholder {
+    color: transparent;
+}
+.floating-label-container label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 5px;
+    z-index: 0;
+    transition-duration: 0.1s;
+    color: #B5B5C3;
+    pointer-events: none;
+}
+.floating-label-container input:focus, .floating-label-container textarea:focus  {
+    border: 2px solid #3699FF;
+}
+.floating-label-container input:focus + label, .floating-label-container input:not(:placeholder-shown) + label,
+.floating-label-container textarea:focus + label, .floating-label-container textarea:not(:placeholder-shown) + label{
+    top: 0;
+    left: 7px;
+}
+.floating-label-container input:focus + label, .floating-label-container textarea:focus + label {
+    color: #3699FF;
+}
+.floating-label-container input.has-error {
+    border-color: #F64E60;
+}
+.floating-label-container input.has-error + label{
+    color: #F64E60;
+}
+
+
+/************** IOS Button ***************/
+.ios-button {
+    appearance: none;
+    border: none;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background: #e7e7e7;
+    border-radius: 30px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    user-select: none;
+    /* box-shadow: 0px 0px 5px #9E9E9E; */
+}
+.ios-button::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    left: 3px;
+    transition-duration: 0.2s;
+    box-shadow: 0px 0px 5px #9E9E9E;
+}
+.ios-button:checked::after {
+    left: calc(100% - 24px - 3px);
+    box-shadow: 0px 0px 5px #12467c;
+}
+.ios-button:checked {
+    background: #3699FF;
+}
+
+/************** Bootstrap Select ***************/
+.bootstrap-select>.dropdown-toggle {
+    height: 45px;
+}
+.bootstrap-select .dropdown-toggle .filter-option {
+    display: flex;
+    align-items: center;
+}
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+    border: 2px solid #cfcfd9;
+    border-radius: 4px;
+    background: transparent;
+}
+.bootstrap-select>.dropdown-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.bootstrap-select .form-control:focus {
+    box-shadow: none;
+    border-color: #3699FF !important;
+}
+.bs-actionsbox, .bs-donebutton, .bs-searchbox {
+    margin-bottom: 5px;
+}
+.dropdown-item.active, .dropdown-item:active {
+    background-color: transparent;
+}
+.bootstrap-select .dropdown-menu {
+    border: none !important;
+    box-shadow: 0px 0px 50px 0px rgb(211, 211, 211);
+}
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner, .bootstrap-select .dropdown-menu li a {
+    color: #3F4254;
+}
+.bootstrap-select .bs-ok-default:after {
+    border-color: #7E8299;
+    width: .4em;
+    height: .6em;
+    border-width: 0 .15em .15em 0;
+}
+.bootstrap-select.show-tick .dropdown-menu .selected span.check-mark {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.bootstrap-select .dropdown-item.selected {
+    background: #eceff3;
+}
+.bootstrap-select .no-results {
+    background: white;
+}
+.has-error .bootstrap-select .dropdown-toggle {
+    border: none !important;
+}
+.input-select-container.has-error .dropdown.bootstrap-select{
+    border-color: #F64E60;
+}
+.input-select-container.has-error .custom-span-input-label {
+    color: #F64E60;
+}
