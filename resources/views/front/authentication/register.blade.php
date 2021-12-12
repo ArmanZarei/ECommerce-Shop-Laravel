@@ -21,6 +21,12 @@
                             <x-form.inputs.text name="cellphone" containerClass="mt-3" />
                             <x-form.inputs.submit class="mt-3" />
                         </x-form.form>
+                        <hr />
+                        <a class="btn btn-style-1 no-duration btn-light-dark mr-2 d-block" href="{{ route('provider.login', 'github') }}">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fab fa-github me-2" style="font-size: 23px"></i>Login with Github
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
