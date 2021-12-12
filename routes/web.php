@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Auth\SocialiteAuthController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{product}', [FrontProductController::class, 'show'])->name('front.product.show');
 Route::get('/categories/{category:slug}', [FrontCategoryController::class, 'show'])->name('front.category.show');
+Route::get('/login/{provider}/', [SocialiteAuthController::class, 'redirectToProvider'])->name('provider.login');
+Route::get('/login/{provider}/callback', [SocialiteAuthController::class, 'handleProviderCallback']);
 
 
 Route::prefix('/admin')->name('admin.')->group(function () {
