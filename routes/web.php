@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Auth\ActivationController;
 use App\Http\Controllers\Auth\SocialiteAuthController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\ProductController;
@@ -26,6 +27,9 @@ use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{product}', [FrontProductController::class, 'show'])->name('front.product.show');
 Route::get('/categories/{category:slug}', [FrontCategoryController::class, 'show'])->name('front.category.show');
+
+Route::get('/login/activate', [ActivationController::class, 'activationPage'])->name('activation.page')->middleware('auth');
+Route::post('/login/activate', [ActivationController::class, 'handleActivation'])->name('activation.action')->middleware('auth');
 Route::get('/login/{provider}/', [SocialiteAuthController::class, 'redirectToProvider'])->name('provider.login');
 Route::get('/login/{provider}/callback', [SocialiteAuthController::class, 'handleProviderCallback']);
 
