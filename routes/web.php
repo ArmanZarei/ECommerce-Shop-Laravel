@@ -28,8 +28,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{product}', [FrontProductController::class, 'show'])->name('front.product.show');
 Route::get('/categories/{category:slug}', [FrontCategoryController::class, 'show'])->name('front.category.show');
 
-Route::get('/login/activate', [ActivationController::class, 'activationPage'])->name('activation.page')->middleware('auth');
-Route::post('/login/activate', [ActivationController::class, 'handleActivation'])->name('activation.action')->middleware('auth');
+Route::get('/login/activate', [ActivationController::class, 'activationPage'])->name('activation.page')->middleware(['auth', 'user.inactive']);
+Route::post('/login/activate', [ActivationController::class, 'handleActivation'])->name('activation.action')->middleware(['auth', 'user.inactive']);
 Route::get('/login/{provider}/', [SocialiteAuthController::class, 'redirectToProvider'])->name('provider.login');
 Route::get('/login/{provider}/callback', [SocialiteAuthController::class, 'handleProviderCallback']);
 
@@ -43,3 +43,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
 
     Route::resource('banners', BannerController::class)->except('show');
 });
+
+Route::get('test-activation', function () {
+    dd("You're OK!");
+})->middleware(['auth', 'user.active']);
