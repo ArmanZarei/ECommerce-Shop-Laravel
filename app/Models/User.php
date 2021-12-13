@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(ActivationCode::class);
     }
+
+    public function getIsActiveAttribute()
+    {
+        return $this->activated_at != null;
+    }
 }
