@@ -117,10 +117,10 @@
 .floating-label-container input:focus + label, .floating-label-container textarea:focus + label {
     color: #3699FF;
 }
-.floating-label-container input.has-error {
+.floating-label-container input.has-error, .floating-label-container textarea.has-error {
     border-color: #F64E60;
 }
-.floating-label-container input.has-error + label{
+.floating-label-container input.has-error + label, .floating-label-container textarea.has-error + label{
     color: #F64E60;
 }
 
