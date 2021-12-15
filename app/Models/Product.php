@@ -53,6 +53,21 @@ class Product extends Model
         return $this->hasMany(ProductVariation::class);
     }
 
+    public function rates()
+    {
+        return $this->belongsToMany(User::class, 'product_rates')->withPivot('rate')->withTimestamps();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function approvedComments()
+    {
+        return $this->comments()->where('status', Comment::STATUS_APPROVED);
+    }
+
     public function getPrimaryImageUrlAttribute()
     {
         return asset('storage/'.env('PRODUCT_IMAGES_PATH').$this->primary_image);
