@@ -45,6 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function rates()
+    {
+        return $this->belongsToMany(Product::class, 'product_rates')->withPivot('rate')->withTimestamps();
+    }
+
     public function activationCode()
     {
         return $this->hasOne(ActivationCode::class);
