@@ -27,7 +27,7 @@ span.role {
     font-weight: bold;
 }
 span.comment_author {
-    margin: 8px 10px 0 20px;
+    margin: 0 10px 0 20px;
     display: block;
     float: left;
     font-weight: bold;
@@ -36,7 +36,7 @@ span.comment_author {
     overflow: hidden;
 }
 .comment-content {
-    margin: 0 10px;
+    margin: 5px 17px;
     padding: 1px 22px;
     box-sizing: border-box;
     background: #ddd;
