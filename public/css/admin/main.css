@@ -643,3 +643,12 @@ div.notify {
     background: #ecf1f6;
     font-size: 22px;
 }
+
+
+/************** Comments ***************/
+.change-comment-status-actions i:hover {
+    background: #E0E0E0 !important;
+}
+.change-comment-status-actions i.status-selected {
+    background: #E0E0E0 !important;
+}
