@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->hasOne(ActivationCode::class);
     }
 
+    public function wishList()
+    {
+        return $this->belongsToMany(Product::class, 'wishlist');
+    }
+
     public function getIsActiveAttribute()
     {
         return $this->activated_at != null;

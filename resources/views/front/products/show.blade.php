@@ -43,6 +43,10 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h1 class="card-title h3">{{ $product->name }}</h1>
+                        @auth
+                            <i id="toggle-wishlist" class="text-danger {{ auth()->user()->wishList()->where('product_id', $product->id)->first() ? 'fas' : 'far' }} fa-heart position-absolute"
+                               style="right: 20px; top: 20px; font-size: 22px; cursor: pointer;"></i>
+                        @endauth
                         <hr>
                         <h6 class="fw-bold">Description: </h6>
                         <p class="card-text ms-3">{{ $product->description }}</p>
@@ -201,6 +205,28 @@
                     rateInput.value = cnt;
                 });
             })
+        </script>
+
+        <script>
+            const productWishListUrl = @json(route('products.wishlist.toggle', $product->id));
+            const csrfToken = @json(csrf_token());
+            $(document).ready(function () {
+                $(function() {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': csrfToken,
+                        }
+                    });
+                });
+
+                $("#toggle-wishlist").on('click', function () {
+                    $.post(productWishListUrl, {
+                        '_method': 'PUT',
+                    }, function () {
+                        location.reload();
+                    });
+                });
+            });
         </script>
     @endpush
 @endonce

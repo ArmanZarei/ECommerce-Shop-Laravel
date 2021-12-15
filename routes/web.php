@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ActivationController;
 use App\Http\Controllers\Auth\SocialiteAuthController;
 use App\Http\Controllers\Front\CommentRateController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\WishListController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;
@@ -36,6 +37,8 @@ Route::get('/login/{provider}/', [SocialiteAuthController::class, 'redirectToPro
 Route::get('/login/{provider}/callback', [SocialiteAuthController::class, 'handleProviderCallback']);
 
 Route::post('/products/{product}/comments', [CommentRateController::class, 'store'])->name('comment.create');
+
+Route::put('/products/{product}/wishlist', [WishListController::class, 'toggleProduct'])->name('products.wishlist.toggle')->middleware('auth');
 
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('brands', BrandController::class)->except(['destroy', 'show']);
