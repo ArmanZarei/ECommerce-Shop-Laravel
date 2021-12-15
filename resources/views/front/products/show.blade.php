@@ -2,6 +2,11 @@
 
 @section('title', 'Product '.$product->name)
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/home/comments.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common/formcomponents.css') }}">
+@endpush
+
 {{-- TODO : Rating --}}
 @section('content')
     <div class="container mt-5">
@@ -90,6 +95,70 @@
             </div>
         </div>
     </div>
+    <div class="container mt-5">
+        <h5>Comments</h5>
+        <hr>
+        <div id="comments-container">
+            @if(sizeof($product->approvedComments) == 0)
+                <div class="alert alert-warning text-center">No Comments</div>
+            @endif
+            @foreach($product->approvedComments as $comment)
+                <div class="comment">
+                    <div class="container_comment_avatar_role">
+                        <div class="comment-avatar">
+                            <img alt="" src="https://avatars.githubusercontent.com/u/45759498?v=4" srcset="http://0.gravatar.com/avatar/feee02e2b880ad601fe7ff7947b7776c?s=180&amp;d=mm&amp;r=g 2x" class="avatar avatar-90 photo" height="90" width="90">
+                        </div>
+                    </div>
+                    <div class="comment_text_wrapper">
+                        <div class="d-flex align-items-center">
+                            <span class="comment_author">{{ $comment->user->name }}</span>
+                            <div class="text-warning">
+                                @for($i = 0; $i < $commentsRate[$comment->id]; $i++)
+                                    <i class="fas fa-star"></i>
+                                @endfor
+                                @for($i = 0; $i < 5-$commentsRate[$comment->id]; $i++)
+                                    <i class="far fa-star"></i>
+                                @endfor
+                            </div>
+                            @if($comment->status == App\Models\Comment::STATUS_PENDING)
+                                <span class="bg-warning comment-awaiting-moderation">Waiting for approval</span>
+                            @endif
+                        </div>
+                        {{-- TODO --}}
+                        {{--<div class="action-btn-group float-left d-inline-block" style="margin: 7px 10px;">
+                            <a href="" class="admin-btn-action text-success" title="Accept" data-status="accepted" data-commentid=""><i class="fa fa-check"></i></a>
+                            <a href="" class="admin-btn-action text-danger" title="Reject" data-status="rejected" data-commentid=""><i class="fa fa-times"></i></a>
+                        </div>--}}
+                        <div class="comment-content">
+                            <p style="margin-top: 15px;">{{ $comment->text }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <hr class="mt-5">
+        <div class="row mt-5">
+            <div class="col-md-6 col-12 offset-md-3">
+                <h6 class="text-center">Submit a comment</h6>
+                <hr>
+                <div class="rating-container text-warning">
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                @error('rate')
+                    <span style="color: #F64E60;">{{ $message }}</span>
+                @enderror
+                <x-form.form action="{{ route('comment.create', $product->id) }}" class="mb-5 mt-3">
+                    <input type="hidden" name="rate">
+                    <x-form.inputs.textarea name="content" />
+                    <x-form.inputs.submit class="mt-3" />
+                </x-form.form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @once
@@ -107,6 +176,31 @@
                     $("#product-quantity").html(variationsQuantities[$(this).val()]);
                 });
             });
+        </script>
+
+        <script>
+            const ratingContainer = document.getElementById('rating-container');
+            const stars = document.querySelectorAll('.rating-container i');
+            const rateInput = document.querySelector('input[name="rate"]');
+            stars.forEach(star => {
+                star.addEventListener('click', e => {
+                    let s = e.target;
+                    let cnt = 0;
+                    while (s != null) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                        s = s.previousElementSibling;
+                        cnt++;
+                    }
+                    s = e.target.nextElementSibling;
+                    while (s != null) {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                        s = s.nextElementSibling;
+                    }
+                    rateInput.value = cnt;
+                });
+            })
         </script>
     @endpush
 @endonce
